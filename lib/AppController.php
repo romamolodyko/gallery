@@ -46,7 +46,7 @@
 				$request = new Request();
 				$action = ControllerFactory::runAction($request);
 			}catch(Exception $e){
-				echo '<strong>Произошла непредвиденная ошибка!</strong>'.$e->getMessage();
+				echo $e->getMessage();
 			}
 		}
 	}

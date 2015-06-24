@@ -7,6 +7,6 @@
 			'app_name'=>'Gallery',
 			'default_controller'=>'init',
 			'base_path'=>$_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR,
-			'include_path'=>['lib','controller','model'],
+			'include_path'=>['lib','controller','model','component'], //В каких дирректориях искать классы
 			'width_thumbs'=>200,
 		];

@@ -12,4 +12,13 @@ class Model{
 			echo $e->getMessage();
 		}
 	}
+
+	//Розпарсить ответ
+	static public function fetchAndGetObj($STH){
+		$mw = [];
+		while($obj = $STH->fetch()){
+			$mw[] = $obj;
+		}
+		return $mw;
+	}
 }

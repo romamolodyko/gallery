@@ -26,8 +26,8 @@
 	<div>
 		<div class="title-app">Gallery</div>
 		<div class="btns">
-		<div class="sort-date"><a href="#sortBy=date">Дата загрузки</a></div>
-		<div class="sort-size"><a href="#sortBy=size">Размер файла</a></div>
+		<div class="sort-date"><a href="javascript:void(0);">Дата загрузки</a></div>
+		<div class="sort-size"><a href="javascript:void(0);">Размер файла</a></div>
 		<div class="upload-image">
 			<a href="#" data-reveal-id="myModal" data-animation="fadeAndPop" 
 				data-animationspeed="300" data-closeonbackgroundclick="true" 

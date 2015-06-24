@@ -5,6 +5,11 @@
 
 		public $defaultAction = 'save';
 
+		public function __construct($request){
+			parent::__construct($request);
+			$this->model = new ImageModel();
+		}
+
 		public function saveAction(){
 
 			if($this->request->isFile()){
@@ -48,7 +53,7 @@
 					throw new Exception("Изображение не сохранилось");
 				}
 
-				$this->saveDb($newFileName,$file['size'],time(),$comment);
+				$this->model->saveDb($newFileName,$file['size'],time(),$comment);
 				echo "Файл успешно загружен";
 			}else{
 				throw new Exception("Не обнаружено изображение");
@@ -75,10 +80,28 @@
 			}
 		}
 
+		function removeAction(){
+			$id = $this->request->get('id');
+			$name = $this->request->get('name');
+			if($this->model->remove($id)){
+
+				$ds = DIRECTORY_SEPARATOR;
+				$uploadDirFull = App::get('base_path').'image'.$ds.'full'.$ds;
+				$uploadDirSmall= App::get('base_path').'image'.$ds.'small'.$ds;
+
+				unlink($uploadDirFull.$name);
+				unlink($uploadDirSmall.$name);
+
+				echo 'true';
+			}else{
+				echo 'false';
+			}
+		}
+
 		//Вывести картинки по критерию, и обернуть в представление
 		public function getAction(){
 			$str = '';
-			$obj = $this->selectAll(
+			$obj = $this->model->selectAll(
 						$this->request->get('from'),
 						$this->request->get('to'),
 						$this->request->get('type'),
@@ -90,41 +113,18 @@
 			echo $str;
 		}
 
-		//Сохранить информацию о картинке
-		function saveDb($name,$size,$ts,$comment){
-			$STH = Model::getDBHandler()->prepare("INSERT INTO tbl_image (name,size,ts,comment)
-												values (:name,:size,:ts,:comment)");
-			if($STH->execute([':name'=>$name,':size'=>(int)$size,':ts'=>(int)$ts,':comment'=>$comment])){
-				return true;
-			}else{
-				return false;
-			}
-		}
-
 		function saveCommentAction(){
 			$id = $this->request->get('id');
 			$comment = $this->request->get('comment');
-			$STH = Model::getDBHandler()->prepare("UPDATE tbl_image SET comment = :comment WHERE id = :id");
-			if($STH->execute([':id'=>$id,':comment'=>$comment])){
+			if($this->model->saveComment($id,$comment)){
 				echo 'true';
 			}else{
 				echo 'false';
 			}
 		}
 
-		//Вывести строки по критерию
-		function selectAll($from,$to,$type,$asc){
-			$asc = $asc ? 'ASC' : 'DESC';
-			$STH = Model::getDBHandler()->prepare("SELECT tbl_image.* FROM tbl_image ORDER BY $type $asc LIMIT $from,$to");
-			$STH->execute();
-			$STH->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'tbl_image');  
-			return Model::fetchAndGetObj($STH);
-		}
-
 		//Колличество строк в таблице
 		function countAction(){
-			$STH = Model::getDBHandler()->prepare("SELECT count(*) FROM `tbl_image`");
-			$STH->execute();
-			echo $STH->fetchColumn();
+			echo $this->model->count();
 		}
 	}

@@ -6,6 +6,7 @@ $(function(){
 	var sortType = {'type':'ts','asc':true};
 
 	$(".sort-date").click(function(){
+		$('.next').off('click');
 		$container.empty();
 		sortType = {'type':'ts','asc':true};
 		addNextBlock.first = true;
@@ -13,6 +14,7 @@ $(function(){
 		$('.next').click();
 	});
 	$(".sort-size").click(function(){
+		$('.next').off('click');
 		$container.empty();
 		sortType = {'type':'size','asc':true};
 		addNextBlock.first = true;
@@ -31,14 +33,14 @@ $(function(){
 
 			var countItemsInTable = parseInt(response);
 			var countItemsInPage = $container.find('div').length;
-			console.log(countItemsInPage);
+			console.log(countItemsInPage,sortType);
 			var dif = countItemsInTable - countItemsInPage;
 
 			//Если на странице не все картинки
 			if(dif > 0){
 				$('.next').css('display','block');
 				var from = countItemsInPage;
-				var to = 4;
+				var to = 25;
 				$('.next').off('click');
 				$('.next').click(update);
 				function update(){
@@ -46,7 +48,11 @@ $(function(){
 						url: '/?controller=image&action=get&from='+from+'&to='+to,
 						data: sortType,
 					}).done(function(response){
-						$container.append(response);
+						$(response).each(function(i,e){
+							var id = parseInt($(this).attr('data-id'));
+							if(!$container.find('.item[data-id='+id+']').attr('class'))
+								$container.append(e);
+						})
 						addNextBlock();
 					});
 				}
@@ -69,6 +75,25 @@ $(function(){
 			title : {
 				type : 'inside'
 			}
+		},
+		afterLoad: function(e){
+			console.log('dd');
+			var item = $(e.element).parent();
+			var id = item.attr('data-id');
+			var name =item.attr('data-name');
+			var ts = item.attr('data-ts');
+			$('.mdata').text(ts);
+			$('.mremove').off('click');
+			$('.mremove').click(function(){
+				$.ajax({
+					url: '/?controller=image&action=remove',
+					data:{id:id,name:name}
+				}).done(function(response){
+					console.log(response);
+					item.remove();
+					$('.fancybox-close').click();
+				});
+			});
 		}
 	});
 

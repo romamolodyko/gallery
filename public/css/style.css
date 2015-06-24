@@ -1,0 +1,193 @@
+/* Start: Recommended Isotope styles */
+
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+/* End: Recommended Isotope styles */
+
+
+
+/* disable CSS transitions for containers with infinite scrolling*/
+.isotope.infinite-scrolling {
+  -webkit-transition: none;
+     -moz-transition: none;
+      -ms-transition: none;
+       -o-transition: none;
+          transition: none;
+}
+
+/*--------------------------------------------------------------------------------------*/
+
+
+/*
+ * Widget
+ */
+.uploader{
+  border: 2px dotted #A5A5C7;
+  width: 100%;
+  color: #92AAB0;
+  text-align: center;
+  vertical-align: middle;
+  padding:0;
+  margin-bottom: 10px;
+  font-size: 24px;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.uploader-active {
+  border-color: #0B85A1;
+}
+
+.uploader label {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  padding: 25px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.uploader input {
+  display: none;
+}
+
+.uploader label:hover {
+  background-color: #E5E5E5;
+}
+
+/*
+ * File list
+ */
+#fileList {
+  float:right;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  color: gray;
+  
+  font-size: 12px;
+  text-align: left;
+  overflow: auto;
+}
+
+#fileList .file {
+width: 100%;
+  margin-bottom: 15px;
+}
+
+#fileList .info {
+width: 100%;
+  height: 26px;
+  display: block;
+  overflow: hidden;
+  
+  line-height: 13px;
+}
+
+#fileList .filename {
+  font-weight: bold;
+}
+
+#fileList .bar {
+  border: solid 1px #C0C0C0;
+  height: 12px;
+  margin-top: 5px;
+  padding: 1px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#fileList .progress {
+  height: 8px;
+  background-color: #ACBDC2;
+}
+
+#fileList span.success {
+  color: #366F36;
+}
+
+#fileList span.error {
+  color: #990000;
+}
+
+/* --------------------------------------------------------------- */
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.header{
+  height:40px;
+  border:1px solid #eee;
+}
+
+#myModal{
+  text-align: center;
+}
+
+.header div{
+  display: inline-block;
+}
+
+#content{
+  width: 800px;
+  margin: auto;
+}
+
+.onload{
+  display: none;
+}

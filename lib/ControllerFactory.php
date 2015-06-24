@@ -7,7 +7,7 @@
 
 		//Получаем экземпляр контроллера на основании запроса
 		static function getController(Request $request){
-			$controller = empty($request->get('controller')) ? App::get('default_controller') : $request->get('controller');
+			$controller = ($request->get('controller')==null) ? App::get('default_controller') : $request->get('controller');
 			if(!preg_match('/\W/',$controller)){
 				if(!empty($controller)){
 					$controller = UCFirst(strtolower($controller)).'Controller';
@@ -25,7 +25,7 @@
 		//Запускаем action метод на основании запроса
 		static function runAction(Request $request){
 			$class = self::getController($request);
-			$action = empty($request->get('action')) ? $class->getDefaultAction() : strtolower($request->get('action')).'Action';
+			$action = ($request->get('action')==null) ? $class->getDefaultAction() : strtolower($request->get('action')).'Action';
 			if(!preg_match('/\W/',$action)){
 				if(!empty($action)){
 					$ref_class = new ReflectionClass($class);

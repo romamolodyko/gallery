@@ -7,19 +7,22 @@
   
   <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  <script src="/public/js/jquery-1.7.1.min.js"></script>
-  <script src="/public/js/jquery.isotope.min.js"></script>
-  <script src="/public/js/jquery.ba-bbq.min.js"></script>
-  <script type="text/javascript" src="/public/js/dmuploader.min.js"></script>
-  <script type="text/javascript" src="/public/js/jquery.reveal.js"></script> 
-  <script type="text/javascript" src="/public/js/jquery.jscroll.min.js"></script>
-  <script type="text/javascript" src="/public/js/jquery.form.min.js"></script>
-  <script type="text/javascript" src="/public/js/jquery.fancybox.js"></script>
-  <script type="text/javascript" src="/public/js/main.js"></script>
+  <script src="<?=App::get('prefix')?>/public/js/jquery-1.7.1.min.js"></script>
+  <script src="<?=App::get('prefix')?>/public/js/jquery.isotope.min.js"></script>
+  <script src="<?=App::get('prefix')?>/public/js/jquery.ba-bbq.min.js"></script>
+  <script type="text/javascript" src="<?=App::get('prefix')?>/public/js/dmuploader.min.js"></script>
+  <script type="text/javascript" src="<?=App::get('prefix')?>/public/js/jquery.reveal.js"></script> 
+  <script type="text/javascript" src="<?=App::get('prefix')?>/public/js/jquery.jscroll.min.js"></script>
+  <script type="text/javascript" src="<?=App::get('prefix')?>/public/js/jquery.form.min.js"></script>
+  <script type="text/javascript" src="<?=App::get('prefix')?>/public/js/jquery.fancybox.js"></script>
+  <script type="text/javascript" src="<?=App::get('prefix')?>/public/js/main.js"></script>
 
-  <link type="text/css" rel="stylesheet" href="/public/css/style.css">
-  <link type="text/css" rel="stylesheet" href="/public/css/reveal.css">
-  <link type="text/css" rel="stylesheet" href="/public/css/fancybox/jquery.fancybox.css">
+  <link type="text/css" rel="stylesheet" href="<?=App::get('prefix')?>/public/css/style.css">
+  <link type="text/css" rel="stylesheet" href="<?=App::get('prefix')?>/public/css/reveal.css">
+  <link type="text/css" rel="stylesheet" href="<?=App::get('prefix')?>/public/css/fancybox/jquery.fancybox.css">
+  <script>
+  	window.prefix = '<?=App::get("prefix")?>';
+  </script>
 </head>
 <body>
 <div class="header option-set">

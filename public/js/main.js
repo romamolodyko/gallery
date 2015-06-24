@@ -28,12 +28,11 @@ $(function(){
 	//Открыть следующую группу картинок
 	function addNextBlock(){
 		$.ajax({
-			url: '/?controller=image&action=count',
+			url: window.prefix+'/?controller=image&action=count',
 		}).done(function(response){
 
 			var countItemsInTable = parseInt(response);
 			var countItemsInPage = $container.find('div').length;
-			console.log(countItemsInPage,sortType);
 			var dif = countItemsInTable - countItemsInPage;
 
 			//Если на странице не все картинки
@@ -45,7 +44,7 @@ $(function(){
 				$('.next').click(update);
 				function update(){
 					$.ajax({
-						url: '/?controller=image&action=get&from='+from+'&to='+to,
+						url: window.prefix+'/?controller=image&action=get&from='+from+'&to='+to,
 						data: sortType,
 					}).done(function(response){
 						$(response).each(function(i,e){
@@ -77,7 +76,6 @@ $(function(){
 			}
 		},
 		afterLoad: function(e){
-			console.log('dd');
 			var item = $(e.element).parent();
 			var id = item.attr('data-id');
 			var name =item.attr('data-name');
@@ -86,10 +84,9 @@ $(function(){
 			$('.mremove').off('click');
 			$('.mremove').click(function(){
 				$.ajax({
-					url: '/?controller=image&action=remove',
+					url: window.prefix+'/?controller=image&action=remove',
 					data:{id:id,name:name}
 				}).done(function(response){
-					console.log(response);
 					item.remove();
 					$('.fancybox-close').click();
 				});
@@ -123,7 +120,7 @@ $(function(){
 			if(newText != text){
 				var id = elem.parents('.fancybox-skin').find('.fancybox-image').attr('src').split('=')[1];
 				$.ajax({
-					url: '/?controller=image&action=savecomment',
+					url: window.prefix+'/?controller=image&action=savecomment',
 					data:{id:id,comment:newText}
 				}).done(function(response){
 					$('.item[data-id='+id+']').find('a').attr('title',newText);

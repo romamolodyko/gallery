@@ -3,10 +3,10 @@
 	class ImageModel extends Model{
 
 		//Сохранить информацию о картинке
-		function saveDb($name,$size,$ts,$comment){
-			$STH = Model::getDBHandler()->prepare("INSERT INTO tbl_image (name,size,ts,comment)
-												values (:name,:size,:ts,:comment)");
-			if($STH->execute([':name'=>$name,':size'=>(int)$size,':ts'=>(int)$ts,':comment'=>$comment])){
+		function saveDb($name,$ts,$comment){
+			$STH = Model::getDBHandler()->prepare("INSERT INTO image (image_name,date,comments)
+												values (:name,:ts,:comment)");
+			if($STH->execute([':name'=>$name,':ts'=>(int)$ts,':comment'=>$comment])){
 				return true;
 			}else{
 				return false;
@@ -23,17 +23,17 @@
 		}
 
 		//Вывести строки по критерию
-		function selectAll($from,$to,$type,$asc){
-			$asc = $asc ? 'ASC' : 'DESC';
-			$STH = Model::getDBHandler()->prepare("SELECT tbl_image.* FROM tbl_image ORDER BY $type $asc LIMIT $from,$to");
+		function selectAll($from,$to){
+			//$asc = $asc ? 'ASC' : 'DESC';
+			$STH = Model::getDBHandler()->prepare("SELECT * FROM image LIMIT $from,$to");
 			$STH->execute();
-			$STH->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'tbl_image');  
+			$STH->setFetchMode(PDO::FETCH_ASSOC);
 			return Model::fetchAndGetObj($STH);
 		}
 
 		//Колличество строк в таблице
 		function count(){
-			$STH = Model::getDBHandler()->prepare("SELECT count(*) FROM `tbl_image`");
+			$STH = Model::getDBHandler()->prepare("SELECT count(*) FROM image");
 			$STH->execute();
 			return $STH->fetchColumn();
 		}

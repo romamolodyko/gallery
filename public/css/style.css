@@ -1,222 +1,125 @@
-/* --------------------------------------------------------------- */
 body{
-  margin: 0;
-  padding: 0;
-
-  font-family: tahoma, arial, verdana, sans-serif, Lucida Sans;
+	margin:0;
+	width:100%;
+	height: 100%;
 }
-
 .header{
-  height:40px;
-  border-bottom: 1px solid #eee;
+	height: 100px;
+
 }
 
-.title-app{
-  color: #69A0D7;
-  font-weight: bold;
-  font-size: 23px;
+h1{
+	margin-top: 0px;
+	color: #8CA589;
+	font-size: 62px;
+	box-shadow: 0px 57px 65px rgba(218, 228, 220, 0.1);
 }
+.site{
+	
+    background-image: url(http://www.takefoto.ru/userfiles/image/Dlya%20Statey/10.12.2012/dof/Hud_object_09-Hi-dof-wallpaper-HD.jpeg);
+    background-repeat: no-repeat;
+	background-size: 1500px 1200px;
+	width: 100%;
+	height: 800px;
+	text-align: center;
 
-#myModal{
-  text-align: center;
 }
-
-.header .btns div,.title-app{
-  display: inline-block;
-  height: 100%;
-  line-height: 41px;
-  margin: 0 1px;
+header ul{
+    margin: 0px;
 }
-
-.header .btns div a{
-  padding: 0 15px;
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  text-decoration: none;
-color: #3577A1;
+.image{
+	margin: 20px;
+	display: inline-block;
+	box-shadow:10px 15px 13px rgb(16, 67, 1);
 }
-
-.header .btns div:hover{
-  background-color: #eee;
-}
-
-.btns{
-display: inline-block;
-position: absolute;
-right: 0;
-top:0;
-}
-
-#content{
-width: 800px;
-max-width: 800px;
-margin: auto;
-min-width: 800px;
-}
-
-.onload{
-  display: none;
-}
-
-.element{
-  float: left;
-}
-
-.header>div{
-  display: block;
-  width: 800px;
-  position: relative;
-  margin: auto;
-  height: 100%;
-}
-
-.textarea textarea{
-  width: 80%;
-  height: 50px;
-  margin: 10px 0px 0px;
-}
-
-.btn{
-  position: relative;
-  display: inline-block;
-  padding: 6px 12px;
-  font-size: 13px;
-  line-height: 20px;
-  color: #333;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  background-color: #eee;
-  background-image: -webkit-linear-gradient(#fcfcfc, #eee);
-  background-image: linear-gradient(#fcfcfc, #eee);
-  border: 1px solid #d5d5d5;
-  border-radius: 3px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-appearance: none;
-}
-
-.btn:hover{
-  text-decoration: none;
-  background-color: #ddd;
-  background-image: -webkit-linear-gradient(#eee, #ddd);
-  background-image: linear-gradient(#eee, #ddd);
-  border-color: #ccc;
-}
-
-<!-- Style grid -->
-.grid:after{
-  clear:both;
-  content:'';
-  display: table;
-}
-
-[class*='c-']{
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  float:left;
-}
-
-.next{
-  display: none;
-}
-
-.middle-block{
-  margin-top: 3px;
-  font-size: 14px;
-  position: relative;
-z-index: 9000;
-}
-
-.mremove{
-  float:right;
-  position: relative;
-  z-index: 8041;
-  font-size: 13px;
-}
-
-.mremove:hover{
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.mdata{
-  font-size: 12px;
-}
-
-/* ------------- Контейнер с адаптивными блоками------------- */
-.masonry {
-    margin: 1.5em 0;
-    padding: 0;
-    column-gap: 12px; /* Общее расстояние между колонками */
-    font-size: .85em;
-    -moz-column-gap: 12px; /* Расстояние между колонками для Firefox */
-    -webkit-column-gap: 12px; /* Расстояние между колонками  для Safari, Chrome и iOS */
-     -moz-column-count: 4;
-    -webkit-column-count: 4;
-    column-count: 4;
-}
+#lightbox{
+    background-color: rgba(4, 29, 0, 0.69);
+    padding: 10px;
+    border-bottom: 2px solid #666;
+    border-right: 2px solid #666;
+    }
+#lightboxDetails{
+    font-size: 0.8em;
+    padding-top: 0.4em;
+    }
+#lightboxCaption{ float: left; }
+#keyboardMsg{ float: right; }
  
-/* Элементы в виде плиток с содержанием */
-.item {
-    display: inline-block;
-    background: #fff;
-    padding: 5px;
-    margin: 0 0 10px;
+#lightbox img{ border: none; }
+#overlay img{ border: none; }
+
+#pagination_page{
+	display: inline-block;
+    font-size: 20px;
+    margin-right: 35px;
+
+}
+.page{
+	padding: 3px;
+	display: inline-block;
+	background-color: #fff;
+}
+.page a{
+	text-decoration: none;
+	color: #000;
+}
+a{
+	text-decoration: none;	
+	color: #C9D6C9;
+	font-size: 20px;
+
+}
+.add{
+	color: #C9D6C9;
+	font-size: 20px;
+
+}
+a:hover{
+	color: #05EF05;
+	font-size: 25px;
+
+}
+form{
+	padding-top: 50px;
+	border-radius: 10px;
+}
+input:hover{
+	background-color: #05EF05;
+	border-radius: 10px;
+}
+
+
+#eclipse
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
     width: 100%;
-    box-sizing: border-box; /* Изменения алгоритма расчета ширины и высоты элемента.*/
-    -moz-box-sizing: border-box; /* Для Firefox */ 
-    -webkit-box-sizing: border-box; /* Для Safari, Chrome, iOS иAndroid */ 
-    box-shadow: 2px 2px 4px 0 #ccc; /* Внешняя тень плиток */
+    height: 100%;
+    background-color: #000;
+    opacity: 0.4;
+    display: none;
+
 }
 
-.item:hover{
-  box-shadow: 2px 2px 4px 0 #687DD0;
-}
+#img
+{
+    position: absolute;
+    display: none;
+    top: 0px;
+    left: 0px;
+    width: 900px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-left: 200px;
 
-/* Стили картинок, видое и фреймов внутри адаптивных плиток */
-img, iframe {
-max-width: 100%;
-height: auto;
-display: block;
 }
-
-.fancybox-title input{
-  padding: 2px;
-  width: 90%;
-}
-
-.fancybox-title button{
-  padding: 2px;
-  margin-top: 0px;
-  float: right;
-  width: 6%;
-  background-image: url('/gallery/public/img/save.png');
-  background-position: -5px -5px;
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  border: none;
-  background-color: #fff;
-}
-
-.fancybox-title:hover{
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-/* Стили ссылок при наведении */
-.item a:hover {
-color: #E88F00;    
-border-bottom: 1px dotted #9F1D35;
-}
-
-.next{
-  padding: 6px;
-  margin-bottom: 30px;
-  width: 100%;
-  text-align: center;
+#out_img
+{
+    display: inline-block;
+    top: 0px;
+    left: 0px;
+    width: 900px;
+    height: 100%;
 }

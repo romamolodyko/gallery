@@ -1,5 +1,5 @@
 $(function(){
-
+    return;
 	var $container = $('#container');
 
 	//Хранится тип сортировки для отправки на сервер

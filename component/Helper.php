@@ -2,6 +2,11 @@
 
 	class Helper{
 
+		static public function test()
+		{
+			return 'test';
+		}
+
 		//Измениь размер изображения и сохранить в дирректорию
 		static public function img_resize($src, $dest, $width, $height, $quality=100, $rgb=0xFFFFFF){
 			if (!file_exists($src)) return false;

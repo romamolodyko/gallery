@@ -1,130 +1,75 @@
 <?php
-	
-	//Класс для работы с изображениями
-	class ImageController extends Controller{
 
-		public $defaultAction = 'save';
+/**
+ * Class ImageController for work with gallery
+ */
+class ImageController extends Controller
+{
+    /** @var string Is the default action which will be use when the routing parameters won't passed */
+    public $defaultAction = 'index';
 
-		public function __construct($request){
-			parent::__construct($request);
-			$this->model = new ImageModel();
-		}
+    /** @var string Is the layout for render all content */
+    public $layout = 'base';
 
-		public function saveAction(){
+    public function __construct($request)
+    {
+        // Call parent constructor
+        parent::__construct($request);
 
-			if($this->request->isFile()){
+        // Set model
+        $this->model = new ImageModel();
+    }
 
-				$ds = DIRECTORY_SEPARATOR;
-				$uploadDirFull = App::get('base_path').'image'.$ds.'full'.$ds;
-				$uploadDirSmall= App::get('base_path').'image'.$ds.'small'.$ds;
+    /**
+     * Is the main action to start app
+     * Start write code here
+     */
+    public function indexAction()
+    {
+        // Write code here to create some functionality
 
-				$file = $this->request->getParamFile('file');
-				$format = Helper::getFormatFile($file);
+        $count = 0;
+        $page = 1;
+        $countImage = 0;
+        $count_of_page = App::get('count_of_page');
+        // Get "GET" parameter count
+        if ($this->request->get('page')) {
+            $page = $this->request->get('page');
+        }
+        // IF you want use some controller in component directory you have to only use this name and don't
+        // do some include of require
+        // die(Helper::test());
 
-				$size = getimagesize($file['tmp_name']);
-				list($widthImage,$heightImage) = $size;
-				$factor = App::get('width_thumbs') / $widthImage;
+        $pageNumber = $count_of_page * ($page-1);
+        $array = $this ->model->selectAll($pageNumber, $count_of_page);
+        $counter = $this ->model->count();
+        $text = '';
+        $textCount = '';
 
-				$uniqId = uniqid();
-				$newFileName = $uniqId.'.'.$format;
-				
-				$comment = '';
-				if($this->request->isPost()){
-					$comment = $this->request->get('comment');
-				}
+        // Iterate items and render views
+        if ($counter > $count_of_page) {
+            for ($i = 1; $i <= $counter; $i=$i+$count_of_page) {
+                $count = $count + 1;
+                $textCount .= $this->render('gallery.pagination', array("number_page" => $count), false, false);
+            }
+        }
 
-				$this->ensure($file,$format,$comment);
+            foreach ($array as $key) {
+                $countImage = $countImage+1;
+                $imageName = $key["image_name"];
+                $comment = $key["comments"];
+                $data = $key["date"];
+                $text .= $this->render('gallery.item',
+                array("imageName" => $imageName, "comment" => $comment, "data" => $data, 'countImage' => $countImage),
+                false,
+                false
+                );
+            }
 
-				if(!move_uploaded_file(
-					$file['tmp_name'],
-					$uploadDirFull.$newFileName
-				)){
-					throw new Exception("Изображение не сохранилось");
-				}
+        // Show main results
 
-				//Делаем мини копию изображения
-				if(!Helper::img_resize(
-					$uploadDirFull.$newFileName,
-					$uploadDirSmall.$newFileName,
-					App::get('width_thumbs'),
-					(int)($heightImage*$factor),
-					60
-				)){
-					throw new Exception("Изображение не сохранилось");
-				}
+        $this->render('gallery.index', array('content' => $text, 'count' => $textCount));
 
-				$this->model->saveDb($newFileName,$file['size'],time(),$comment);
-				echo "Файл успешно загружен";
-			}else{
-				throw new Exception("Не обнаружено изображение");
-			}
-		}
+    }
 
-		//Проверка данных
-		public function ensure($file,$format,$comment){
-
-			if($file['size'] >1024*1024){
-				throw new Exception("Изображение больше 1мб");
-			}
-
-			if(($format != 'png')&&($format != 'jpg')&&($format != 'jpeg')){
-				throw new Exception("Неверный формат изображение");
-			}
-
-			if($file['size'] >1024*1024){
-				throw new Exception("Изображение больше 1мб");
-			}
-
-			if(strlen($comment)>200){
-				throw new Exception("Комментарий должен быть не больше 200 символов");
-			}
-		}
-
-		function removeAction(){
-			$id = $this->request->get('id');
-			$name = $this->request->get('name');
-			if($this->model->remove($id)){
-
-				$ds = DIRECTORY_SEPARATOR;
-				$uploadDirFull = App::get('base_path').'image'.$ds.'full'.$ds;
-				$uploadDirSmall= App::get('base_path').'image'.$ds.'small'.$ds;
-
-				unlink($uploadDirFull.$name);
-				unlink($uploadDirSmall.$name);
-
-				echo 'true';
-			}else{
-				echo 'false';
-			}
-		}
-
-		//Вывести картинки по критерию, и обернуть в представление
-		public function getAction(){
-			$str = '';
-			$obj = $this->model->selectAll(
-						$this->request->get('from'),
-						$this->request->get('to'),
-						$this->request->get('type'),
-						$this->request->get('asc')
-					);
-			foreach($obj as $k=>$v){
-				$str .= $this->render('main.item',['item'=>$v],false,false);
-			}
-			echo $str;
-		}
-
-		function saveCommentAction(){
-			$id = $this->request->get('id');
-			$comment = $this->request->get('comment');
-			if($this->model->saveComment($id,$comment)){
-				echo 'true';
-			}else{
-				echo 'false';
-			}
-		}
-
-		//Колличество строк в таблице
-		function countAction(){
-			echo $this->model->count();
-		}
-	}
+}
